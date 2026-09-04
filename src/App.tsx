@@ -1,16 +1,22 @@
- type LearningLog = {
+ 
+ import {Header} from "./components/Header";
+ import {LearningLog} from "./components/LearningLog";
+ 
+
+function App() {
+
+   type Learning= {
     id: number;
     chapter: number;
     title: string;
     isCompleted: boolean;
-};
-
-function App() {
+}; 
  
-  const logs: LearningLog[] = [
+  const logs: Learning[] = [
     { id: 1, chapter: 0, title: "環境構築とTypeScriptの基本", isCompleted: true },
     { id: 2, chapter: 1, title: "コンポーネントとPropsの型", isCompleted: false },
   ];
+
 
  
   const getStatusMessage = (completed: boolean): string => {
@@ -19,18 +25,23 @@ function App() {
 
   return (
    <div style={{ padding: "20px" }}>
-      <h1>学習記録アプリ</h1>
+      <h1>学習記録アプリ(React学習用)      
+      </h1>
 
       <h2>学習リスト</h2>
+
+      <Header appName="TypeScript" totalCount={logs.length} />
       <ul>
-        {/* ⭕️ OKな書き方: .map() で1つずつ取り出してプロパティを指定する */}
         {logs.map((item) => (
-          <li key={item.id}>
-            Chapter {item.chapter}: {item.title} 
-            【{item.isCompleted ? "完了" : "進行中"}】
-          </li>
+          <LearningLog
+            id={item.id}
+            chapter={item.chapter}
+            title={item.title}
+            isCompleted={item.isCompleted}
+          />
         ))}
       </ul>
+      
     </div>
   );
 }
